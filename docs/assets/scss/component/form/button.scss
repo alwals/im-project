@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+/**
+ * @desciption 表单按钮样式定义
+ */
+
+.ui-button {
+    display: inline-block;
+    border: none;
+    @include radius(3px);
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    padding: 0 20px;
+    min-width: 80px;
+    &:active {
+        opacity: 0.5;
+    }
+    // 小按钮
+    &-s {
+        &blue,
+        &orange,
+        &disable {
+            line-height: 24px;
+        }
+    }
+    // 中按钮
+    &-m {
+        &blue,
+        &orange,
+        &disable {
+            line-height: 28px;
+        }
+    }
+    // 大按钮
+    &-l {
+        &blue,
+        &orange,
+        &disable {
+            line-height: 32px;
+            font-size: 15px;
+        }
+    }
+    // 按钮颜色
+    &-s,
+    &-m,
+    &-l {
+        // 蓝色
+        &blue {
+            background-color: $color-blue;
+        }
+        // 橘色
+        &orange {
+            background-color: $color-orange;
+        }
+        // 禁用灰色
+        &disable {
+            background-color: #afb5b9;
+        }
+    }
+    &:disabled {
+        background-color: #afb5b9;
+    }
+}
+
+// 超链接形式按钮
+a.ui-button {
+    color: #fff;
+}
+
+.ui-button-field {
+    text-align: center;
+    margin-top: 30px;
+    .ui-button {
+        margin: 0 15px;
+    }
+}
+
+.ui-button-field-block {
+    @extend .ui-button-field;
+    @include flexbox();
+    .ui-button {
+        line-height: 48px;
+        font-size: 16px;
+        @include flex(1);
+    }
+}

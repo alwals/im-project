@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+/**
+* @desciption index 集团金融门户手机版通用业务样式
+* @author guojm
+* @lastModified 2017-10-23
+* @maintainers guojm
+*/
+
+
+/* 卡片样式 */
+
+.card {
+    position: relative;
+    margin: 15px;
+    padding: 15px 12px;
+    @include radius(6px);
+    background: $icon-url no-repeat #1579d1;
+    background-size: $icon-size;
+    background-position: right -12px;
+    color: #fff;
+    // 切换按钮
+    .change-card-btn {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 44px;
+        height: 44px;
+        background: $icon-url no-repeat;
+        background-size: $icon-size;
+        background-position: left -294px;
+    }
+    &-number {
+        font-size: 11px;
+        span {
+            margin-right: 5px;
+        }
+    }
+    .row1 {
+        width: 100%;
+        height: 32px;
+        margin-top: 10px;
+        line-height: 32px;
+        p:first-child {
+            float: left;
+            font-size: 15px;
+        }
+        .money {
+            float: right;
+            margin-left: 5px;
+            text-align: right;
+            span {
+                font-size: 25px;
+            }
+        }
+    }
+    .row2 {
+        width: 100%;
+        overflow: hidden;
+        p:first-child {
+            float: left;
+        }
+        .type {
+            float: right;
+            margin-left: 5px;
+            text-align: right;
+            .change-type-btn {
+                margin-left: 2px;
+                text-decoration: underline;
+                color: #fff;
+            }
+        }
+    }
+    // 小卡
+    &-mini {
+        @extend .fn-clearfix;
+        background-position: right -36px;
+        .card-username {
+            float: left;
+            font-size: 15px;
+        }
+        .card-number {
+            float: right;
+            font-size: 15px;
+            letter-spacing: 0.1em;
+        }
+    }
+}

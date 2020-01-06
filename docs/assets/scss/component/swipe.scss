@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+/**
+ * @desciption dora.swipe 样式模块 - 轮播、滚动、tab切换样式
+ * @author guojm
+ * @lastModified 2017-11-08
+ * @maintainers guojm
+ */
+
+
+/* ui-swipe */
+
+.ui-swipe {
+    overflow: hidden;
+    position: relative;
+    &-wrap {
+        overflow: hidden;
+        position: relative;
+    }
+    &-item {
+        float: left;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    // 轮播图圆点
+    .ui-slide-indicator {
+        position: absolute;
+        left: 50%;
+        bottom: 15px;
+        @include transform-translateX(-50%);
+        li {
+            float: left;
+            width: 6px;
+            height: 6px;
+            font-size: 0;
+            background: #bdcbe2;
+            overflow: hidden;
+            margin: 0 3px;
+            @include radius(3px);
+            @include transition(all, .2s, ease, 0s);
+            &.ui-slide-indicator-current {
+                width: 27px;
+                background: $color-blue;
+            }
+        }
+    }
+    // tab标签
+    .ui-tab-indicator {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        height: 50px;
+        @include flexbox();
+        li {
+            @include flex(1);
+            position: relative;
+            background: #fff;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 18px;
+            color: #8b96a2;
+            a {
+                display: block;
+                color: #8b96a2;
+                border-bottom: 1px solid $color-lightgray;
+                &.active {
+                    color: $color-blue;
+                    border-bottom-color: $color-blue;
+                }
+            }
+            &+li {
+                &:before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    margin-top: -9px;
+                    width: 1px;
+                    height: 18px;
+                    background: #e5e5e5;
+                }
+            }
+        }
+    }
+}
+
+
+/* Tab选项卡 */
+
+.ui-tab {
+    padding-top: 50px;
+}
+
+// 分页内容滑动
+.ui-swipe-scroll {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    &-wrap {
+        padding-bottom: 20px;
+    }
+}

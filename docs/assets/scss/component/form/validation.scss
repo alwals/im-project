@@ -1,0 +1,53 @@
+@charset "utf-8";
+// @desciption validation - 表单校验样式标签样式定义
+// @author guojm
+// @lastModified 2017-10-16
+// @maintainers guojm
+// 校验错误提示信息
+.ui-form-error {
+    padding: 0 16px;
+    line-height: 1.5;
+    font-size: 13px;
+    color: #333;
+    p {
+        margin: 5px 0;
+    }
+}
+
+.formError {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0 10px;
+    @include transform-translateY(100%);
+    background: #fbec88;
+    border: 2px solid $color-darkgray;
+    padding: 6px 12px;
+    line-height: 1.5;
+    @include radius(4px);
+    &Content {
+        font-size: 12px;
+        color: #333;
+    }
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 12px;
+        top: -7px;
+        width: 10px;
+        height: 10px;
+        background: #fbec88;
+        border: 2px solid $color-darkgray;
+        border-bottom: none;
+        border-right: none;
+        @include transform-rotate(45deg);
+    }
+}
+
+// 通过设置表单项层叠避免遮挡验证信息
+@for $num from 1 through 10 {
+    .ui-form-item:nth-child(#{$num}) {
+        z-index: 100 - $num;
+    }
+}

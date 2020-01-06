@@ -1,0 +1,175 @@
+@charset "utf-8";
+
+/**
+ * @description 表单各输入项(输入框、下拉框、单选框、多选框、按钮)及校验等样式定义
+ */
+
+// 表单变量定义
+$form-input-height: 20px; // ui-input高
+$form-border-highlight-color: #6ab5ff;
+.ui-form {
+    // 普通的表单项
+    &-item {
+        position: relative;
+        background-color: #fff;
+        border-top: 1px solid $color-lightgray;
+        border-bottom: 1px solid $color-lightgray;
+        @include flexbox();
+        padding: 14px 16px;
+        line-height: $form-input-height;
+        &+.ui-form-item {
+            border-top: none;
+        }
+        &-box {
+            @include flex(1);
+            height: $form-input-height;
+            line-height: $form-input-height;
+            text-align: right;
+        }
+        .ui-input {
+            @include flex(1);
+            text-align: right;
+            font-size: 15px;
+        }
+        // 普通的表单项
+        .ui-label {
+            @include flex();
+            margin-right: 10px;
+            height: $form-input-height;
+            line-height: $form-input-height;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+        // 短信验证码选项
+        &-sms {
+            input {
+                width: 90px;
+            }
+            &+.ui-sms-info {
+                margin: 15px 0;
+                padding: 0 16px;
+                line-height: 1;
+                font-size: 13px;
+                color: #6e6e6e;
+            }
+        }
+        .sms-area {
+            @include order(1);
+            @include flex();
+            margin-left: 6px;
+            font-size: 13px;
+            .sms-stat-btn {
+                float: right;
+                width: 80px;
+                border: 1px solid $color-blue;
+                @include radius(4px);
+                line-height: 22px;
+                margin: -2px 0;
+                text-align: center;
+                color: $color-blue;
+                &[disabled] {
+                    background: $color-darkgray;
+                    border-color: $color-darkgray;
+                    color: #fff;
+                }
+                &:active {
+                    border-color: #006ba1;
+                    color: #006ba1;
+                }
+                &[disabled]:active {
+                    background: $color-darkgray;
+                    border-color: $color-darkgray;
+                    color: #fff;
+                    opacity: 1;
+                }
+            }
+        }
+        &-focus {}
+        // 输入错误
+        &-error {}
+    }
+    // 输入框下方提示信息
+    &-explain {
+        padding: 6px 16px;
+        color: $color-lightblack;
+        font-size: 12px;
+    }
+}
+
+// 单功能选择按钮
+.ui-typeswitch {
+    font-size: 0;
+    &-item {
+        display: inline-block;
+        label {
+            display: inline-block;
+            margin: 0 0 0 6px;
+            padding: 0 10px;
+            min-width: 40px;
+            height: 28px;
+            line-height: 28px;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            background-color: $color-darkgray;
+            @include radius(4px);
+            @include transition(all, 0.2s, ease, 0s);
+        }
+        input[type="radio"] {
+            display: none;
+            // 选中
+            &:checked {
+                &+label {
+                    background-color: $color-blue;
+                }
+            }
+        }
+        &:first-child {
+            input:first-child+label {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+// 同意协议
+.ui-agreement {
+    margin: 16px;
+    .ui-checkbox {
+        &+label {
+            position: relative;
+            height: auto;
+            padding-left: 20px;
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 20px;
+                height: 20px;
+                background-image: $icon-url;
+                background-repeat: no-repeat;
+                background-size: $icon-size;
+                background-position: -200px -290px;
+            }
+        }
+        // 选中
+        &:checked+label {
+            &::before {
+                background-position: -200px -308px;
+            }
+        }
+    }
+    a {
+        color: $color-blue;
+    }
+}
+
+@import "form/label.scss"; // 标签
+@import "form/input.scss"; // 输入框
+@import "form/button.scss"; // 按钮
+@import "form/checkbox.scss"; // 复选框
+@import "form/select.scss"; // 下拉框
+@import "form/validation.scss"; // 验证信息
+@import "form/search.scss"; // 搜索框

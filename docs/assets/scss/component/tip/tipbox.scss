@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+// @desciption dora.tipbox 提示框
+// @author zhuqr
+// @lastModified 2015-06-02
+// @maintainers zhuqr
+
+.ui-tipbox {
+    position: relative;
+    padding: 15px 20px 15px 66px;
+    color: #666;
+    line-height: 22px;
+    &:after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        width: 36px;
+        height: 36px;
+        background: $icon-url no-repeat;
+        background-size: 387px;
+    }
+    // 成功提示
+    &-success {
+        &:after {
+            background-position: -358px -553px;
+        }
+    }
+    // 标题
+    &-title {
+        font-weight: bold;
+        font-size: 15px;
+    }
+    // 只有标题的简单提示框
+    &-simple {
+        padding: 25px 20px 25px 66px;
+        &:after {
+            top: 50%;
+            margin-top: -18px;
+        }
+    }
+}

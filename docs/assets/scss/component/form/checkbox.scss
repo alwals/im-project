@@ -1,0 +1,24 @@
+@charset "utf-8";
+// @desciption dora.checkbox 样式模块 - 表单复选框样式定义
+// @lastModified 2017-02-21
+// @maintainers guojm
+.ui-checkbox {
+    display: none;
+    // 未选中
+    + label {
+        display: inline-block;
+        padding: 0 6px 0 24px;
+        height: 18px;
+        line-height: 18px;
+        overflow: hidden;
+        vertical-align: middle;
+        // 点按时
+        &:active {}
+    }
+    // 选中
+    &:checked + label {}
+    // 禁用
+    &:disabled + label {}
+    // 选中并禁用
+    &:checked:disabled + label {}
+}

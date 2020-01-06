@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+/**
+ * @desciption dora.label 样式模块 - 表单标签样式定义
+ */
+
+
+/* 普通标签 */
+
+.ui-label {
+    color: $color-darkblack;
+    vertical-align: middle;
+}

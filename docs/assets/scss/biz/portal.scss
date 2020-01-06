@@ -1,0 +1,484 @@
+@charset "utf-8";
+
+/**
+* @desciption index 集团金融门户首页业务样式
+* @author zhangcq
+* @lastModified 2017-11-22
+* @maintainers guojm
+*/
+
+// 门户首页图标
+%icon-group {
+    background: url("#{$images-url}icon-group.png") no-repeat;
+    background-size: 215px 388px;
+}
+
+// 首页样式
+#page.groupportal-index {
+    overflow-y: scroll;
+    #content {
+        position: static;
+        overflow: auto;
+    }
+    // --------------------- 头部 ---------------------
+    // header anv
+    #header {
+        position: relative;
+        background: url("#{$images-url}bcg-index.jpg") no-repeat center top transparent;
+        background-size: 100% 178px;
+        .header-back:before {
+            @extend %icon-group;
+            background-position: -41px -32px;
+        }
+    }
+    // 头部背景
+    .h-bcg {
+        position: relative;
+        margin-top: -$top-height;
+        height: 178px;
+        background: url("#{$images-url}bcg-index.jpg") no-repeat;
+        background-size: 100% 178px;
+        a {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        /* 隐藏金额状态 */
+        .btn-toggle.hide-amount:after {
+            background-position: -78px 3px;
+        }
+    }
+    // 未登录
+    .h-mid {
+        padding-top: 74px;
+        text-align: center;
+        h2 {
+            font-size: 20px;
+            color: #fff;
+            &::before,
+            &::after {
+                content: '';
+                display: inline-block;
+                width: 28px;
+                height: 1px;
+                margin: 0 4px;
+                vertical-align: middle;
+                background: #fff;
+            }
+        }
+        // 财富总览链接
+        .h-mid-link {
+            margin-top: 16px;
+            display: inline-block;
+            font-size: 13px;
+            color: #fff;
+            height: 27px;
+            line-height: 27px;
+            padding: 0 8px;
+            background: rgba(241, 248, 255, 0.11);
+            border: 1px solid rgba(255, 255, 255, 0.62);
+            border-radius: 12px;
+            &::before {
+                content: '';
+                width: 18px;
+                height: 18px;
+                margin-right: 4px;
+                display: inline-block;
+                vertical-align: -4px;
+                @extend %icon-group;
+                background-position: -60px -15px;
+            }
+        }
+    }
+    // 已登录
+    .h-info {
+        position: absolute;
+        top: $top-height;
+        left: 20px;
+        span {
+            font-size: 16px;
+            color: #fff;
+            margin-right: 10px;
+        }
+        a {
+            display: inline-block;
+            height: 24px;
+            padding: 0 8px;
+            line-height: 24px;
+            background: rgba(241, 248, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.52);
+            @include radius(12px);
+        }
+    }
+    // 说明按钮
+    .group-info-btn {
+        position: absolute;
+        top: $top-height;
+        right: 20px;
+        color: rgba(255, 255, 255, 0.85);
+        font-style: normal;
+        &::before {
+            margin-right: 4px;
+            content: '';
+            display: inline-block;
+            vertical-align: -2px;
+            width: 12px;
+            height: 12px;
+            @extend %icon-group;
+            background-position: -40px 0;
+        }
+    }
+    // 资产、负债
+    .property {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: $top-height + 30px;
+        font-size: 13px;
+        .h-text {
+            float: left;
+            width: 50%;
+            div {
+                margin-top: 6px;
+                font-size: 23px;
+                line-height: 34px;
+                color: #fff;
+            }
+            .pro-show-asset,
+            .pro-show-debt {
+                em {
+                    margin-left: 5px;
+                    font-size: 13px;
+                }
+            }
+            .pro-show-asset {
+                color: #faea82;
+            }
+            .pro-show-debt {
+                color: #b2fa82;
+            }
+        }
+    }
+    // 隐藏显示切换
+    .btn-toggle {
+        position: absolute;
+        left: 5px;
+        bottom: 0;
+        width: 50px;
+        height: 38px;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 15px;
+            bottom: 10px;
+            width: 16px;
+            height: 16px;
+            @extend %icon-group;
+            background-position: -60px 1px;
+        }
+    }
+    // 统计时间
+    .h-time {
+        position: absolute;
+        right: 20px;
+        bottom: 10px;
+        color: rgba(255, 255, 255, 0.85);
+    }
+    // --------------------- 主体 ---------------------
+    .group-list {
+        margin-bottom: 20px;
+        background: #fff;
+        &:last-child {
+            margin: 0;
+        }
+        .group-tit {
+            height: 50px;
+            line-height: 50px;
+            padding: 0 15px;
+            font-size: 14px;
+            color: #4b5062;
+            border-bottom: 1px solid #ebebeb;
+            h2 {
+                display: inline-block;
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    margin-right: 5px;
+                    vertical-align: -4px;
+                    @extend %icon-group;
+                    background-position: -77px -16px;
+                }
+            }
+            .more {
+                float: right;
+                position: relative;
+                padding-right: 18px;
+                font-size: 13px;
+                &::after {
+                    position: absolute;
+                    right: 0;
+                    top: 16px;
+                    content: '';
+                    width: 14px;
+                    height: 14px;
+                    @extend %icon-group;
+                    background-position: -36px -15px;
+                }
+            }
+        }
+        // 多元金融
+        &-0 {
+            li {
+                float: left;
+                width: 25%;
+                text-align: center;
+                a {
+                    display: block;
+                    padding: 20px 0;
+                    font-size: 13px;
+                    color: #5d5f65;
+                }
+                i {
+                    display: block;
+                    width: 32px;
+                    height: 32px;
+                    margin: 0 auto 4px;
+                    @extend %icon-group;
+                }
+                // 兴业信托
+                .i-FUN02 {
+                    background-position: 0 0;
+                }
+                // 兴业基金
+                .i-FUN03 {
+                    background-position: 0 -32px;
+                }
+                // 消费金融
+                .i-FUN04 {
+                    background-position: 0 -64px;
+                }
+                // 兴业研究
+                .i-FUN14 {
+                    background-position: 0 -96px;
+                }
+                // 华福证券
+                .i-FUN06 {
+                    background-position: 0 -128px;
+                }
+                // 智能投顾
+                .i-intel {
+                    background-position: 0 -160px;
+                }
+                // 钱大掌柜
+                .i-FUN05 {
+                    background-position: 0 -192px;
+                }
+                // 信用卡
+                .i-FUN08 {
+                    background-position: 0 -224px;
+                }
+                // 兴业期货
+                .i-FUN13 {
+                    background-position: 0 -256px;
+                }
+                // 好兴动
+                .i-hxd {
+                    background-position: 0 -288px;
+                }
+                // 企业移动银行
+                .i-FUN10 {
+                    background-position: 0 -320px;
+                }
+                // 兴业管家
+                .i-FUN09 {
+                    background-position: 0 -352px;
+                }
+                // 兴业借记卡
+                .i-FUN01 {
+                    background-position: -32px -352px;
+                }
+            }
+        }
+        // 网点查询
+        &-1 {
+            .group-tit {
+                border-bottom: none;
+                .more {
+                    color: #a7abb2;
+                }
+                h2::before {
+                    background-position: -134px -16px;
+                }
+            }
+        }
+        // 金融资讯
+        &-2 {
+            .group-tit {
+                h2::before {
+                    background-position: -96px -16px;
+                }
+            }
+        }
+        // 金融资讯文章
+        .group-list-article {
+            &+.group-list-article {
+                border-top: 1px solid #ebebeb;
+            }
+            a {
+                display: block;
+                padding: 12px 15px;
+                &+a {
+                    border-top: 1px solid #ebebeb;
+                }
+            }
+            .article-img {
+                width: 76px;
+                float: left;
+                margin-right: 20px;
+                img {
+                    display: block;
+                    width: 76px;
+                    height: 56px;
+                }
+            }
+            .article-text {
+                padding-top: 6px;
+                h6 {
+                    font-size: 15px;
+                    font-weight: bold;
+                    color: #4b5062;
+                    display: -webkit-box;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
+            }
+        }
+        // 精彩兴业
+        &-3 {
+            &::after {
+                content: '';
+                position: relative;
+                display: block;
+                margin: -1px 0;
+                border-top: 1px solid #f3f6f8;
+            }
+            .group-tit {
+                h2::before {
+                    background-position: -175px -16px;
+                }
+            }
+            li {
+                float: left;
+                width: 50%;
+                height: 80px;
+                border-bottom: 1px solid #ebebeb;
+                &:nth-child(odd) {
+                    border-right: 1px solid #ebebeb;
+                }
+                a {
+                    display: block;
+                    padding: 15px 0 15px 7px;
+                }
+                i {
+                    float: left;
+                    width: 50px;
+                    height: 50px;
+                    margin-right: 5px;
+                    @extend %icon-group;
+                }
+            }
+            .info {
+                overflow: hidden;
+                padding-top: 6px;
+                h6 {
+                    font-size: 15px;
+                    font-weight: bold;
+                    color: #4b5062;
+                }
+                span {
+                    margin-top: 8px;
+                    font-size: 12px;
+                    color: #a2a4af;
+                }
+            }
+            // 兴业管家
+            .i-FUN09 {
+                background-position: -165px -132px;
+            }
+            // 好兴动
+            .i-hxd {
+                background-position: -165px -32px;
+            }
+            // 企业移动银行
+            .i-FUN10 {
+                background-position: -165px -82px;
+            }
+            // 钱大掌柜
+            .i-FUN05 {
+                background-position: -165px -182px;
+            }
+        }
+    }
+}
+
+// 小屏兼容
+@media screen and (max-width: 360px) {
+    .groupportal-index {
+        .group-list-1 .more {
+            font-size: 11px!important;
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .groupportal-index {
+        .group-list .group-tit {
+            font-size: 13px!important;
+        }
+        .group-list-1 .more {
+            font-size: 10px!important;
+        }
+        // 精彩兴业
+        .group-list-3 {
+            li {
+                height: 68px;
+                a {
+                    padding-left: 4px;
+                }
+                i {
+                    width: 36px;
+                    height: 36px;
+                    margin-right: 3px;
+                    background-size: 155px 279px;
+                }
+            }
+            .info {
+                padding-top: 0;
+                h6 {
+                    font-size: 13px;
+                }
+                span {
+                    font-size: 11px;
+                }
+            }
+            // 兴业管家
+            .i-FUN09 {
+                background-position: -118px -95px;
+            }
+            // 好兴动
+            .i-hxd {
+                background-position: -118px -23px;
+            }
+            // 企业移动银行
+            .i-FUN10 {
+                background-position: -118px -59px;
+            }
+            // 钱大掌柜
+            .i-FUN05 {
+                background-position: -118px -131px;
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* ----------------------------------------
+    手机银行demo
+   -----------------------------------------
+ */
+
+
+/* 全局样式 */
+
+@import "global/base.scss";
+@import "global/common.scss";
+@import "global/widget.scss";
+@import "global/layout.scss";
+@import "global/animation.scss";
+
+/* 公共组件样式 */
+
+// @import "component/*.scss";
+@import "component/form.scss"; // 表单
+@import "component/tip.scss"; // 提示信息
+@import "component/swipe.scss"; // 轮播、Tab选项卡
+@import "component/list.scss"; // 列表
+@import "component/dialog.scss"; // 弹出框
+
+/* 业务模块 */
+
+@import "biz/common.scss"; // 业务通用
+@import "biz/login.scss"; // 登录页
+@import "biz/transfer.scss";
+@import "biz/portal.scss"; // 集团门户
+@import "biz/wealth.scss"; // 财富总览
+
+/* -- 终端跨屏适配 -- */
+
+// @import "screen/*.scss";

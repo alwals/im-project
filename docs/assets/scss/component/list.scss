@@ -1,0 +1,148 @@
+@charset "utf-8";
+// @desciption dora.list 各种列表样式定义
+// @author guojm
+// @lastModified 2017-09-04
+// @maintainers guojm
+
+/* 列表样式 */
+
+.ui-list,
+.ui-list-spacing {
+    .ui-list-item {
+        @extend .fn-clearfix;
+        background: #fff;
+        border-top: 1px solid $color-lightgray;
+        border-bottom: 1px solid $color-lightgray;
+        font-size: 15px;
+    }
+}
+
+// 无间距列表
+.ui-list {
+    .ui-list-item+.ui-list-item {
+        border-top: none;
+    }
+    &+.ui-form-item {
+        border-top: none;
+    }
+}
+
+// 有间距列表
+.ui-list-spacing {
+    .ui-list-item+.ui-list-item {
+        margin-top: 15px;
+    }
+}
+
+// 详情列表
+.ui-list-table {
+    width: 100%;
+    td {
+        width: 50%;
+        padding: 15px 10px;
+        background: #fff;
+        border-bottom: 1px solid $color-lightgray;
+        h6 {
+            color: $color-darkgray;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+    tr {
+        td {
+            &:first-child {
+                padding-left: 25px;
+            }
+            &:last-child {
+                padding-right: 25px;
+            }
+        }
+        &:last-child td {
+            border-bottom: none;
+        }
+    }
+}
+
+// 回显信息列表
+.ui-list-info {
+    overflow: hidden;
+    li {
+        background: #fff;
+        padding: 15px 16px;
+        line-height: 22px;
+        font-size: 15px;
+    }
+    .ui-list-item {
+        @include flexbox();
+    }
+    .ui-info {
+        @include flex(1);
+        text-align: right;
+        padding-left: 6px;
+        a {
+            &::after {
+                content: '';
+                @extend .icon-rightarrow;
+                margin-left: 10px;
+            }
+        }
+    }
+    .ui-label {
+        @include flex();
+        padding-right: 6px;
+    }
+    .ui-typeswitch {
+        margin: -4px 0;
+    }
+    .ui-form-item {
+        padding: 0;
+        border: none;
+    }
+}
+
+// 列表组
+.ui-list-group {
+    &-title {
+        padding: 10px 16px;
+        font-size: 14px;
+        // 标题右侧说明文字
+        .tip {
+            float: right;
+            color: $color-darkgray;
+        }
+    }
+    &-box {
+        background: #fff;
+        font-size: 15px;
+    }
+    &+.ui-list-group {
+        margin-top: 15px;
+        .ui-list-group-title {
+            margin-top: -15px;
+        }
+    }
+}
+
+// 加载更多列表项
+.ui-list-more {
+    a {
+        position: relative;
+        display: block;
+        line-height: 25px;
+        text-align: center;
+        font-size: 12px;
+        color: $color-blue;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            margin-left: 30px;
+            top: 10px;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent;
+            border-top-color: $color-blue;
+        }
+    }
+}

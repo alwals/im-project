@@ -1,0 +1,1320 @@
+@charset "utf-8";
+
+/**
+* @desciption wealth 财富总览业务样式
+* @author guojm
+* @lastModified 2017-11-16
+* @maintainers guojm
+*/
+
+// 财富总览环形饼图
+.pie-chart {
+    background: #fff;
+    padding-right: 196px;
+    // 图形区
+    &-plot {
+        position: relative;
+        min-height: 180px;
+    }
+    // 总资产为0时
+    &-bg {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform-translate3d(-50%, -50%, 0);
+        @include radius(50%);
+        background: #e5e5e5;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 25%;
+            height: 25%;
+            background: #fff;
+            @include transform-translate3d(-50%, -50%, 0);
+            @include radius(50%);
+        }
+    }
+    // 饼图容器
+    &-container {
+        position: relative;
+        z-index: 1;
+        max-width: 220px; // 避免部分webview js获取页面宽度有误导致错位
+        .highcharts-background {
+            display: none;
+        }
+    }
+    &-info {
+        position: absolute;
+        right: 6px;
+        top: 50px;
+        width: 190px;
+        font-size: 13px;
+        line-height: 1.6;
+        &-title {
+            h6 {
+                display: inline-block;
+                color: $color-darkgray;
+            }
+        }
+        // 说明
+        &-btn {
+            margin-left: 6px;
+            font-style: normal;
+            color: $color-blue;
+            &:before {
+                margin-right: 3px;
+                content: "";
+                display: inline-block;
+                vertical-align: text-top;
+                width: 15px;
+                height: 15px;
+                background: $icon-url no-repeat;
+                background-size: $icon-size;
+                background-position: -160px -293px;
+            }
+        }
+        &-total {
+            font-size: 24px;
+        }
+    }
+}
+
+
+/* 财富总览首页列表 */
+
+.list-wealth-index {
+    margin-top: 16px;
+    background: #fff;
+    .ui-list-item {
+        display: block;
+        margin: 0 16px;
+        padding: 0;
+        border-bottom: 1px solid $color-lightgray;
+        &:last-child {
+            border: none;
+        }
+    }
+    // 标题
+    .item-title {
+        @extend .fn-clearfix;
+        border-bottom: 1px solid $color-lightgray;
+        padding: 18px 16px;
+        font-size: 13px;
+        line-height: 13px;
+        color: #6e6e6e;
+        h6 {
+            float: left;
+            span {
+                vertical-align: top;
+            }
+            &:before {
+                content: "";
+                display: inline-block;
+                vertical-align: top;
+                margin-right: 6px;
+                width: 3px;
+                height: 13px;
+                background: $color-blue;
+                @include radius(2px);
+            }
+        }
+        em {
+            color: $color-blue;
+        }
+        // 暂无数据
+        .no-data {
+            float: right;
+            font-size: 15px;
+            color: $color-darkgray;
+        }
+    }
+    .chart-item {
+        @include flexbox();
+        padding: 14px 0;
+        line-height: 22px;
+        color: #333;
+        .list-icon {
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 6px;
+            height: 6px;
+            @include radius(100px);
+        }
+        // 更新图标
+        .btn-refresh {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            right: -2px;
+            top: 50%;
+            margin-top: -11px;
+            background: url("#{$images-url}loading-b.png") no-repeat center center;
+            background-size: 16px 16px;
+        }
+        .ui-label {
+            em {
+                color: $color-blue;
+            }
+            .cate {
+                display: inline-block;
+            }
+            .date,
+            .explain {
+                margin-left: 20px;
+                display: block;
+                font-size: 12px;
+                color: $color-darkgray;
+            }
+            .explain {
+                font-size: 13px;
+            }
+        }
+        .ui-info {
+            @include align-self(center);
+            min-width: 80px;
+            position: relative;
+            padding-right: 28px;
+            .link-detail {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                margin-top: -10px;
+            }
+            .number {
+                .msg-loading {
+                    margin-right: -28px;
+                    color: $color-darkgray;
+                    .icon-loading {
+                        vertical-align: text-top;
+                    }
+                }
+            }
+            // 暂无数据
+            .no-data {
+                margin-right: -28px;
+                font-size: 15px;
+                color: $color-darkgray;
+            }
+            .btn {
+                margin-right: -28px;
+                display: inline-block;
+                padding: 0 10px;
+                line-height: 22px;
+                text-align: center;
+                border: 1px solid $color-blue;
+                color: $color-blue;
+                font-size: 12px;
+            }
+        }
+        span {
+            vertical-align: middle;
+        }
+    }
+    // 集团资产首次查询
+    .item-trust {
+        a {
+            position: relative;
+            display: block;
+            width: 100%;
+            line-height: 22px;
+            color: #333;
+            &:before {
+                @extend .icon-rightarrow;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                margin-top: -5px;
+            }
+        }
+        .row2 {
+            margin-top: 6px;
+            span {
+                margin: 0 20px;
+                display: inline-block;
+                vertical-align: top;
+                color: $color-darkgray;
+                font-size: 13px;
+                position: relative;
+                &:before {
+                    content: "";
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-top: 4px;
+                    width: 13px;
+                    height: 13px;
+                    background: $icon-url no-repeat #fff;
+                    background-size: $icon-size;
+                    background-position: -160px -310px;
+                }
+                // 可点击区域
+                .clickable {
+                    position: absolute;
+                    left: -15px;
+                    top: -8px;
+                    background: rgba(0, 0, 0, 0);
+                    width: 50px;
+                    height: 36px;
+                }
+            }
+        }
+        // 不同意
+        .no-agree {
+            &:before,
+            .row1,
+            .row2 {
+                opacity: 0.5;
+            }
+            .row2 {
+                span {
+                    &:before {
+                        background-position: -176px -310px;
+                    }
+                }
+            }
+            &:active {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+// 旧密码验证弹窗，证券资金页
+.ui-dialog-checkout {
+    .ui-dialog-header {
+        border: none;
+        height: 60px;
+    }
+    .ui-dialog-title {
+        padding: 15px 0;
+        text-align: center;
+        font-size: 18px;
+    }
+    .ui-dialog-close {
+        position: absolute;
+    }
+    .ui-dialog-content {
+        p {
+            text-align: center;
+            font-size: 15px;
+            line-height: 2;
+        }
+        .password-wrap {
+            padding: 12px 0 50px;
+            .pwd-box {
+                position: relative;
+                margin: 0 auto;
+                width: 210px;
+                height: 35px;
+            }
+            .pwd-input {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                color: transparent;
+                opacity: 0;
+                border: none;
+                font-size: 20px;
+                z-index: 1;
+                letter-spacing: 20px;
+                &:focus {
+                    left: -1000px;
+                    top: -100px;
+                }
+            }
+            .fake-box {
+                input {
+                    @include radius(0);
+                    float: left;
+                    width: 35px;
+                    height: 35px;
+                    border: 1px solid $color-lightgray;
+                    border-right: none;
+                    text-align: center;
+                    font-size: 22px;
+                    color: #566170;
+                    &:last-child {
+                        border-right: 1px solid $color-lightgray;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* 财富总览资产卡列表 */
+
+.asset-cardlist-title {
+    padding: 18px 16px;
+    font-size: 13px;
+    line-height: 13px;
+    color: #6e6e6e;
+    h6 {
+        display: inline;
+    }
+    a {
+        margin-left: 10px;
+    }
+}
+
+.list-asset-cardlist {
+    &>li {
+        .ui-info {
+            position: relative;
+            padding-right: 18px;
+            .link-detail {
+                @extend .icon-rightarrow;
+                position: absolute;
+                right: 0;
+                top: 6px;
+            }
+        }
+        &:last-child {
+            border: none;
+        }
+        span {
+            vertical-align: middle;
+        }
+        .no-data {
+            margin-right: -18px;
+            color: $color-darkgray;
+        }
+    }
+}
+
+
+/* 负债-信用卡 */
+
+.list-creditcard-title {
+    padding: 16px;
+    font-size: 13px;
+    line-height: 16px;
+    color: #6e6e6e;
+    h6 {
+        display: inline;
+    }
+    a {
+        margin-left: 10px;
+    }
+    .ui-tipup-overlay {
+        float: right;
+        color: $color-blue;
+        .ui-icon-info {
+            margin-right: 3px;
+            display: inline-block;
+            vertical-align: text-top;
+            width: 15px;
+            height: 15px;
+            background: $icon-url no-repeat;
+            background-size: $icon-size;
+            background-position: -160px -293px;
+        }
+    }
+}
+
+.list-creditcard {
+    &>li {
+        display: block;
+        border: none;
+        &+li {
+            margin-top: 5px;
+        }
+    }
+    .info-total {
+        @include flexbox();
+    }
+    .info-detail {
+        margin-top: 14px;
+        border-top: 1px solid $color-lightgray;
+        padding-top: 14px;
+        font-size: 13px;
+        dt {
+            color: $color-darkgray;
+        }
+        dd {
+            @include flexbox();
+            padding-top: 10px;
+        }
+    }
+    .ui-label {
+        .unactivated {
+            margin-left: 4px;
+            font-size: 13px;
+            color: $color-darkgray;
+        }
+    }
+    .ui-info {
+        position: relative;
+        padding-right: 18px;
+        .link-detail {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -10px;
+        }
+        em {
+            margin-right: 6px;
+        }
+        // 更新图标
+        .btn-refresh {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            right: -2px;
+            top: 1px;
+            background: url("#{$images-url}loading-b.png") no-repeat center center;
+            background-size: 16px 16px;
+        }
+        .msg-loading {
+            color: $color-darkgray;
+            .icon-loading {
+                vertical-align: text-top;
+            }
+        }
+    }
+}
+
+
+/* 存款汇总列表 */
+
+.deposit-list {
+    .ui-list-info {
+        li {
+            font-size: 13px;
+            .ui-info {
+                @include align-self(center);
+                span {
+                    white-space: nowrap;
+                }
+            }
+        }
+        .ui-list {
+            &-title {
+                border-top: 1px solid $color-lightgray;
+                font-size: 15px;
+                font-weight: bold;
+            }
+            &-item {
+                display: block;
+                padding: 0;
+                &>a {
+                    @include flexbox();
+                    position: relative;
+                    padding: 15px 30px 15px 16px;
+                    color: #333;
+                    &:after {
+                        @extend .icon-rightarrow;
+                        position: absolute;
+                        top: 50%;
+                        right: 15px;
+                        margin-top: -5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* 基金持仓列表 */
+
+.list-fund {
+    .ui-list-item {
+        padding: 15px;
+        dl {
+            @extend .fn-clearfix;
+        }
+        dt {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        dd {
+            float: left;
+            width: 50%;
+            height: 24px;
+            line-height: 24px;
+            font-size: 13px;
+            &:nth-child(odd) {
+                text-align: right;
+            }
+            label {
+                color: #a7abb2;
+            }
+            span {
+                margin-left: 5px;
+                &.refer-value {
+                    color: $color-blue;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+
+/* 理财持仓列表 */
+
+.list-finance {
+    .ui-list-item {
+        padding: 15px;
+        dl {
+            @extend .fn-clearfix;
+        }
+        dt {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        dd {
+            float: left;
+            width: 50%;
+            height: 24px;
+            line-height: 24px;
+            font-size: 13px;
+            &:nth-child(odd) {
+                text-align: right;
+            }
+            &.row-last {
+                &-left {
+                    width: 60%;
+                }
+                &-right {
+                    width: 40%;
+                }
+            }
+            label {
+                color: #a7abb2;
+            }
+            span {
+                &.finance-value {
+                    color: $color-blue;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+
+/* 证券资金列表 */
+
+.list-stock {
+    .ui-list-item {
+        padding: 10px 15px;
+        table {
+            width: 100%;
+        }
+        tr {
+            td {
+                width: 50%;
+                padding: 5px 0;
+                font-size: 15px;
+                &:last-child {
+                    text-align: right;
+                }
+                .remain {
+                    color: $color-orange;
+                }
+                .btn-query {
+                    color: $color-blue;
+                }
+            }
+        }
+    }
+}
+
+
+/* 兴业宝列表 */
+
+.list-xyb {
+    .ui-list-item {
+        padding: 10px 15px;
+        table {
+            width: 100%;
+        }
+        tr {
+            td {
+                width: 50%;
+                padding: 5px 0;
+                font-size: 15px;
+                &:last-child {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
+
+
+/* 兴业信托列表 */
+
+.list-trust {
+    .ui-list-item {
+        &>a {
+            @extend .fn-clearfix;
+            padding: 15px 30px 15px 15px;
+            position: relative;
+            display: block;
+            color: #333;
+            &:before {
+                @extend .icon-rightarrow;
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                margin-top: -5px;
+            }
+        }
+        dl {
+            @extend .fn-clearfix;
+        }
+        dt {
+            margin-bottom: 10px;
+            em,
+            span {
+                vertical-align: middle;
+            }
+            em {
+                display: inline-block;
+                padding: 0px 3px;
+                border-radius: 3px;
+                color: #fff;
+                font-size: 10px;
+            }
+            .em {
+                // 浮动
+                &-float {
+                    background-color: $color-blue;
+                }
+                // 固定
+                &-fixed {
+                    background-color: $color-green;
+                }
+            }
+            span {
+                margin-left: 6px;
+                font-size: 15px;
+            }
+        }
+        dd {
+            float: left;
+            width: 50%;
+            height: 24px;
+            line-height: 24px;
+            font-size: 13px;
+            &:nth-child(odd) {
+                text-align: right;
+            }
+            &.row2 {
+                &-left {
+                    width: 35%;
+                }
+                &-right {
+                    width: 65%;
+                }
+            }
+            label {
+                color: #a7abb2;
+            }
+            span {
+                &.income-percent,
+                &.refer-value {
+                    color: $color-blue;
+                }
+                // 预期收益率
+                &.income-percent {
+                    font-size: 18px;
+                }
+                // 参考市值
+                &.refer-value {
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+}
+
+
+/* 贵金属资金 */
+
+.gold-btn-wrap {
+    margin-top: 30px;
+    text-align: center;
+    .ui-button {
+        width: 40%;
+        max-width: 166px;
+        padding: 15px 0;
+        border: 2px solid $color-blue;
+        background: #fff;
+        margin: 0 5px;
+        color: $color-blue;
+        font-size: 15px;
+    }
+}
+
+
+/* 贷款列表 */
+
+.list-loan {
+    .ui-list-item {
+        font-size: 15px;
+        a {
+            position: relative;
+            display: block;
+            padding: 18px 30px 18px 16px;
+            color: #333;
+            &:before {
+                @extend .icon-rightarrow;
+                position: absolute;
+                top: 50%;
+                right: 18px;
+                margin-top: -5px;
+            }
+        }
+        dd {
+            @include flexbox();
+            margin-top: 10px;
+            font-size: 10px;
+        }
+        .col1 {
+            @include flex();
+            span {
+                margin-left: 10px;
+            }
+        }
+        .col2 {
+            @include flex(1);
+            text-align: right;
+            min-width: 40%;
+            .number {
+                line-height: 1;
+                font-size: 18px;
+                color: $color-blue;
+            }
+        }
+    }
+}
+
+
+/* 信用卡页面 */
+
+.list-credit-overview {
+    .ui-list-item {
+        @extend .fn-clearfix;
+        padding: 18px 16px;
+        color: #333;
+        .col1 {
+            float: left;
+        }
+        .col2 {
+            float: right;
+            .number {
+                .icon-loading {
+                    vertical-align: text-top;
+                }
+            }
+        }
+    }
+}
+
+
+/* 消费金融贷款列表 */
+
+.list-financial-loan {
+    .ui-list-item {
+        padding: 18px 16px;
+        color: #333;
+        overflow: hidden;
+        dt {
+            font-size: 15px;
+        }
+        dd {
+            text-align: right;
+            font-size: 10px;
+            .number {
+                font-size: 18px;
+                color: $color-blue;
+            }
+        }
+    }
+}
+
+
+/*
+// 新 消费金融贷款列表
+.consumption-fin {
+    &-top {
+        @extend .fn-clearfix;
+        padding: 15px 16px;
+        background: #fff;
+        text-align: center;
+        h6 {
+            color: $color-darkgray;
+        }
+        p {
+            margin-top: 6px;
+            font-size: 20px;
+            color: $color-blue;
+            span {
+                margin-left: 6px;
+                color: #333;
+                font-size: 12px;
+            }
+        }
+        .col {
+            float: left;
+            width: 50%;
+        }
+    }
+    &-list {
+        margin-top: 15px;
+        .ui-list-item {
+            border: none;
+            & + .ui-list-item {
+                border-top: 1px solid $color-lightgray;
+            }
+            a {
+                @include flexbox();
+                position: relative;
+                padding: 15px 32px 15px 16px;
+                font-size: 13px;
+                &::after {
+                    @extend .icon-rightarrow;
+                    position: absolute;
+                    top: 50%;
+                    right: 16px;
+                    margin-top: -5px;
+                }
+                & > div {
+                    label {
+                        color: $color-darkgray;
+                    }
+                }
+            }
+            .repayment {
+                @include flex();
+                margin-right: 10px;
+                p {
+                    line-height: 28px;
+                }
+                span {
+                    margin-left: 10px;
+                    color: #333;
+                }
+            }
+            .balance {
+                @include flex(1);
+                text-align: right;
+                p {
+                    font-size: 20px;
+                    color: $color-blue;
+                }
+            }
+        }
+    }
+    // 未申请贷款
+    &-noresult {
+        text-align: center;
+        .pic {
+            width: 162px;
+            height: 158px;
+            margin: 50px auto 0;
+            background: url("#{$images-url}noresult.png") no-repeat center center;
+            background-size: 162px 158px;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: $color-darkgray;
+        }
+        .btn {
+            margin-top: 30px;
+            @include radius(15px);
+            display: inline-block;
+            line-height: 30px;
+            padding: 0 30px;
+            border: 1px solid $color-blue;
+            font-size: 15px;
+            color: $color-blue;
+        }
+    }
+}
+
+// 消费金融贷款详情
+.consumption-findetail {
+    &-top {
+        padding: 15px 0;
+        background: #fff;
+        .total {
+            @extend .fn-clearfix;
+            text-align: center;
+        }
+        h6 {
+            color: $color-darkgray;
+        }
+        p {
+            margin-top: 6px;
+            font-size: 20px;
+            color: $color-blue;
+            span {
+                margin-left: 6px;
+                vertical-align: middle;
+                color: #333;
+                font-size: 12px;
+            }
+        }
+        .col {
+            float: left;
+            width: 50%;
+        }
+        .detail {
+            margin: 15px 30px 0;
+            padding-top: 15px;
+            border-top: 1px solid $color-lightgray;
+            // 回显信息列表
+            ul {
+                overflow: hidden;
+                li {
+                    @include flexbox();
+                    font-size: 13px;
+                    & + li {
+                        margin-top: 6px;
+                    }
+                }
+                label {
+                    @include flex();
+                    margin-right: 10px;
+                    color: $color-darkgray;
+                }
+                span {
+                    @include flex(1);
+                    text-align: right;
+                }
+            }
+        }
+        & + .ui-tab {
+            margin-top: 15px;
+        }
+    }
+    &-list {
+        .ui-list-item {
+            @include flexbox();
+            padding: 15px 16px;
+            font-size: 13px;
+            border: none;
+            & + .ui-list-item {
+                border-top: 1px solid $color-lightgray;
+            }
+            label {
+                color: $color-darkgray;
+            }
+            .detail {
+                @include flex();
+                margin-right: 10px;
+                dd {
+                    margin-top: 8px;
+                }
+                span {
+                    margin-left: 10px;
+                    color: #333;
+                }
+            }
+            .total {
+                @include flex(1);
+                @include align-self(center);
+                text-align: right;
+                p {
+                    font-size: 20px;
+                    color: $color-blue;
+                }
+            }
+        }
+    }
+}
+*/
+
+
+/* 兴业信托详情 */
+
+.list-trust-detail {
+    .ui-list-table {
+        td {
+            span.table-title {
+                font-size: 15px;
+            }
+            p.p-txt {
+                font-size: 15px;
+            }
+        }
+    }
+    /* 时间线 */
+    .ui-list-timeline {
+        padding: 14px;
+        overflow: hidden;
+        li {
+            float: left;
+            &:nth-child(1),
+            &:nth-child(4) {
+                width: 40%;
+            }
+            &:nth-child(2),
+            &:last-child {
+                float: right;
+                width: 60%;
+                text-align: right;
+            }
+            &.line {
+                position: relative;
+                width: 100%;
+                height: 18px;
+                p {
+                    height: 8px;
+                    border-bottom: 1px solid $color-lightgray;
+                }
+                &:before,
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: 3px;
+                    display: inline-block;
+                    width: 8px;
+                    height: 8px;
+                    background-color: #fff;
+                    border: 1px solid $color-green;
+                    border-radius: 8px;
+                }
+                &:before {
+                    left: 0;
+                }
+                &:after {
+                    right: 0;
+                    background-color: $color-green;
+                }
+            }
+            label {
+                color: $color-darkgray;
+            }
+        }
+    }
+}
+
+
+/* 服务授权 */
+
+.author-info {
+    background: #fff;
+    padding-bottom: 30px;
+    &-icon {
+        display: block;
+        height: 200px;
+        background: url("#{$images-url}icon-author.png") no-repeat center center;
+        background-size: 96px 96px;
+    }
+    p {
+        text-align: center;
+        font-size: 20px;
+    }
+}
+
+.author-agree {
+    margin: 20px 16px;
+    font-size: 13px;
+    &-info {
+        padding-left: 20px;
+        position: relative;
+        font-size: 13px;
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 13px;
+            height: 13px;
+            background: $icon-url no-repeat #fff;
+            background-size: $icon-size;
+            background-position: -160px -310px;
+        }
+        a {
+            color: $color-blue;
+        }
+    }
+    // 不同意
+    &.no-agree {
+        opacity: 0.5;
+        .author-agree-info {
+            &:before {
+                background-position: -176px -310px;
+            }
+        }
+    }
+    &-btn {
+        width: 200px;
+        margin: 30px auto 0;
+    }
+}
+
+
+/* 华福证券 */
+
+.list-huafu-title {
+    border-bottom: 1px solid $color-lightgray;
+    .ui-list-info li {
+        border-bottom: none;
+    }
+    // 注释
+    .tip {
+        padding: 0 16px 15px;
+        font-size: 13px;
+        color: $color-darkgray;
+    }
+}
+
+.list-huafu {
+    .ui-list-item {
+        border-bottom: 1px solid $color-lightgray;
+    }
+    .ui-info {
+        em {
+            margin-right: 6px;
+        }
+    }
+}
+
+
+/* 钱大掌柜 */
+
+.list-qianda {
+    .ui-list-item {
+        border-bottom: 1px solid $color-lightgray;
+    }
+}
+
+
+/* 信用卡详情 */
+
+.credit-detail {
+    &-top {
+        @extend .fn-clearfix;
+        height: 68px;
+        padding: 12px 16px;
+        background: #fff;
+        font-size: 15px;
+        line-height: 20px;
+        .col1 {
+            float: left;
+            .name {
+                font-weight: 600;
+            }
+            .account {
+                margin-top: 3px;
+                font-size: 14px;
+                color: #6e6e6e;
+            }
+        }
+        .col2 {
+            float: right;
+            margin-top: 12px;
+            em {
+                font-weight: 600;
+                color: $color-blue;
+                margin-right: 5px;
+            }
+        }
+    }
+    &-list {
+        .ui-list-item {
+            border: none;
+            margin: 15px 16px;
+            @include radius(3px);
+        }
+        dl {
+            line-height: 1;
+        }
+        dt {
+            padding: 18px 15px;
+            i {
+                vertical-align: top;
+                margin: -2px 4px 0 0;
+                width: 16px;
+                height: 16px;
+                background-position: -18px -339px;
+            }
+            .usd {
+                background-position: -34px -339px;
+            }
+        }
+        dd {
+            @extend .fn-clearfix;
+            border-top: 1px solid $color-lightgray;
+            text-align: center;
+            label {
+                display: block;
+                color: #6e6e6e;
+            }
+            .money {
+                font-weight: 600;
+            }
+        }
+        .dd1 {
+            padding: 25px 0;
+            label {
+                font-size: 14px;
+            }
+            .money {
+                margin-top: 20px;
+                font-size: 28px;
+                color: $color-orange;
+            }
+            .date {
+                margin-top: 16px;
+                font-size: 13px;
+                color: $color-darkgray;
+            }
+        }
+        .dd2 {
+            padding: 15px 0;
+            .col {
+                float: left;
+                width: 50%;
+                &+.col {
+                    border-left: 1px solid $color-lightgray;
+                }
+            }
+            label {
+                font-size: 12px;
+            }
+            .money {
+                margin-top: 10px;
+            }
+        }
+        .dd3 {
+            padding: 15px;
+            label {
+                float: left;
+            }
+            span {
+                float: right;
+            }
+        }
+        .dd4 {
+            padding: 12px 15px;
+            label {
+                float: left;
+                margin-top: 10px;
+            }
+            .info {
+                float: right;
+                text-align: right;
+                .date {
+                    margin-top: 8px;
+                    font-size: 12px;
+                    color: $color-darkgray;
+                }
+            }
+        }
+    }
+}
